@@ -1,0 +1,37 @@
+.plain_detail{
+    .content{
+        overflow-x: hidden;
+        img{margin:0;} 
+        margin: 0 !important;
+    }
+    .footer{
+        width: 750px;
+        // height: 100px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        box-sizing: border-box;
+        padding: 30px 0;
+        background-color: #ddd;
+        position: fixed;
+        bottom: 0;
+        .left{
+            border-right: 2px solid #eee;
+            flex:1.5;
+            text-align: center;
+        }
+        .iconbox{
+            flex: 2;
+            text-align: center;
+        }
+        .left,.iconbox{
+            .adm-badge{
+                background-color: transparent;
+                .adm-badge-content{
+                    color: black;
+                }
+                
+            }
+        }
+    }
+}

@@ -1,0 +1,66 @@
+.home{
+    .swiper_box{
+        height: 820px;
+        .content_box{
+            height: 820px;
+            box-sizing: border-box;
+            background-size: cover;
+            background-repeat: no-repeat;
+            color: #ffffff;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: flex-end;
+            font-size: 48px;
+            user-select: none;
+            padding: 40px;
+            .image{
+                position: absolute;
+                top: 0;
+                left: 0;
+                bottom: 0;
+                right: 0;
+                z-index: -1;
+            }
+            .content{
+                font-size: 36px;
+            }
+            .author{
+                font-size: 24px;
+                padding-top: 8px;
+                color:#eee;
+            }
+        }
+        // 修改指示器的样式
+        .adm-swiper-indicator{
+            bottom: 20px;
+            left: 84%;
+            .adm-page-indicator-dot{
+                width: 12px;
+                height: 12px;
+                border-radius: 6px;
+                background-color: rgba(255,255,255,.5);
+                // opacity: 0.5;
+                margin: 0 6px;
+                &.adm-page-indicator-dot-active{
+                    width: 30px;
+                    height: 10px;
+                    // border-radius: 10%;
+                    background-color: #fff;
+                }
+            }
+            
+        }
+    }
+    .load_more{
+        font-size:30px;
+        // border:1px solid red;
+        text-align: center;
+        align-items: center;
+        padding:24px 0;
+        background-color: #eee;
+    }
+    .news_box{
+        padding:10px 30px;
+        box-sizing: border-box;
+    }
+}
