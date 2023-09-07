@@ -1,0 +1,25 @@
+TASKOA是客户端；TASK-SERVER是服务器端；
+1. 两个文件夹分别跑环境
+2. 启动后台
+   进入TASK-SERVER
+     package.json中可以配置后台启动服务的端口号
+        "config": {
+            "server": 9000, //这个是端口号
+        }
+     执行：
+     $ node server.js   遇到`THE WEB SERVICE SUCCESSFULLY...`则证明启动成功！！
+     备注：窗口不能关闭
+     ----
+     可以CTRL+C结束刚刚启动的服务！基于pm2启动后台！！
+     $ pm2 start server.js --name TASK
+     备注：窗口可关闭，持久化管理后端服务！！
+3. 客户端的准备
+   进入TASKOA，找到src/setupProxy.js，确保跨域代理的地址是刚才自己启动的后台！！
+   Antd的地址：https://ant.design/index-cn
+   已经完成Axios的二次配置 & 跨域代理，其余内容需要自己编写！！
+      + 可基于 函数组件/类组件 任何一种方式完成
+      + 完成任务的 增加/删除/修改/状态筛选 功能！！
+4. 考试时间：2小时
+   全程需要录屏「可使用EVCapture」
+   本着对自己负责的态度，不要抄袭！！不要抄袭！！不要抄袭！！
+   考试结束后，把录屏（包含最后完成的效果展示）发给助教老师！！标注出自己的姓名+班级等！！

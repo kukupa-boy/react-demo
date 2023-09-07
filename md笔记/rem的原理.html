@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <!-- 
+        移动端开发需要设置viewport要设置，如果不设置，浏览器会按照980的宽度渲染页面，手机宽度不足980，整个页面会整体缩小 
+        width=device-width html的渲染宽度和设备宽度一致
+        initial-scale=1.0 初始缩放比例，不放大也不缩小
+        minimum-scale=1.0 最小缩放比例，不允许用户缩小到比1.0更小的比例
+        maximum-scale=1.0 最大缩放比例，不允许用户放大到比1.0更大的比例
+        user-scalable=no 禁止用户缩放
+    -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
+    <link rel="stylesheet" href="../../react-demo/src/assets/reset.min.css" />
+    <title>Document</title>
+    <style>
+        /*
+            实现rem开发的步骤
+            1. 找到参照比例（找到设计稿的宽度，一般为750px），在这个比例下给予html中的font-size一个初始值(这个初始值就是1rem的大小)
+               + html{
+                    // 750px的设计稿中1rem = 100px
+                    // 未来我们要将设计稿中测量的尺寸(px单位)转换为rem单位去设置样式
+                     font-size: 100px; 
+                  }
+            2. 根据当前设备的宽度，计算相对于设计稿750的比例缩放的比例（因为设计稿为750），让rem的转换比例也跟着缩小【rem和px的换算比例修改，之前相对于rem为单位的样式也需要缩小】
+
+            3. 一般还会给页面设置最大宽度，比如750px，这样当设备宽度超过750px时，不让rem比例继续变大，内容居中，左右留白
+            */
+            html{
+                font-size: 100px;
+            }
+            
+            #root{ /*设置页面最大宽度,当大雨这个宽度页面就居中显示*/
+                max-width: 750px;
+                margin: 0 auto;
+            }
+            .box{
+                width: 7.5rem;
+                height: 7.5rem;
+                background-color: red;
+            }
+    </style>
+</head>
+<body>
+    <div id="root">
+        <div class="box">box</div>
+    </div>
+    <script>
+        (function(){
+            const computed =()=>{// 1. 获取当前设备的宽度
+                var deviceWidth = document.documentElement.clientWidth;
+                // 2. 计算当前设备宽度和设计稿宽度的比例
+                // 3. 如果当前设备大于设计稿的宽度，就让比例等于设计稿的宽度
+                if(deviceWidth > 750){
+                    deviceWidth = 750;
+                }
+                var scale = deviceWidth / 750;
+                // 4. 设置html的font-size
+                document.documentElement.style.fontSize = scale * 100 + 'px';
+            }
+            computed();
+            window.addEventListener('resize',computed);
+        })();
+       
+    </script>
+</body>
+</html>

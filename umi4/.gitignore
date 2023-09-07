@@ -1,0 +1,11 @@
+/node_modules
+/.env.local
+/.umirc.local.ts
+/config/config.local.ts
+/src/.umi
+/src/.umi-production
+/src/.umi-test
+/dist
+.swc
+# .umi是umi的编译产物，不需要提交，每次编译都会重新生成
+# .umi-production是umi的编译产物，不需要提交，每次编译都会重新生成

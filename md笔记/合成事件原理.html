@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        html,body{
+            height:100%;
+            overflow: hidden;
+        }
+        #root {
+            width:300px;
+            height:300px;
+            background: lightblue;
+        }
+        .center{
+            position: absolute;
+            top:50%;
+            left:50%;
+            transform: translate(-50%, -50%);
+        }
+        #outer{
+            width:200px;
+            height:200px;
+            background: pink;
+        }
+        #inner{
+            width:100px;
+            height:100px;
+            background: white;
+        } 
+    </style>
+</head>
+<body>
+    <div id="root" class="center">
+        <div id="outer" class="center">
+            <div id="inner" class="center"></div>
+        </div>
+    </div>
+<script>
+     const  root = document.getElementById("root"),
+            outer = document.getElementById("outer"),
+            inner = document.getElementById("inner");
+
+    // 视图渲染解析，给outer/inner元素上加上on开头的属性，和属性对应的方法
+        outer.onClick=()=>{console.log("outer冒泡")}
+        outer.onClickCaptrue=()=>{console.log("outer捕获")}
+        inner.onClick=()=>{console.log("inner冒泡")}
+        inner.onClickCaptrue=()=>{console.log("inner捕获")}
+        const handleE = (e) =>{
+            //  将原生事件e转换为react合成事件e传递给handle函数
+            return e
+        }
+    // 给root做事件委托
+    // composedPath()可以获取当前冒泡的传播路径[事件源,...,window]
+         root.addEventListener("click",(ev)=>{
+            let path = ev.composedPath()
+            let newPath = [...path].reverse() // [window,..., 事件源]
+            newPath.forEach(item => {
+                let handle = item.onClickCaptrue;
+                if(handle) handle(handleE(ev)); // 这里可以解释为什么react普通函数中的this拿不到了,箭头函数的this是绑定时的this使用可以拿到
+            })
+
+        },true)
+        root.addEventListener("click",(ev)=>{
+            let path = ev.composedPath()
+            let newPath = [...path]
+            newPath.forEach(item => {
+                let handle = item.onClick;
+                if(handle) handle(handleE(ev));
+            })
+        },false)
+       
+</script>
+</body>
+</html>

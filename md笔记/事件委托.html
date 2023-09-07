@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        html,body{
+            height:100%;
+            overflow: hidden;
+        }
+        #root {
+            width:300px;
+            height:300px;
+            background: lightblue;
+        }
+        .center{
+            position: absolute;
+            top:50%;
+            left:50%;
+            transform: translate(-50%, -50%);
+        }
+        #outer{
+            width:200px;
+            height:200px;
+            background: pink;
+        }
+        #inner{
+            width:100px;
+            height:100px;
+            background: white;
+        }
+    </style>
+</head>
+<body>
+    <div id="root" class="center">
+        <div id="outer" class="center">
+            <div id="inner" class="center"></div>
+        </div>
+    </div>
+    <script>
+        // window-> document -> html -> body -> root ->outer->inner
+        const html = document.documentElement,
+              body = document.body
+              root = document.getElementById("root")
+              outer = document.getElementById("outer")
+              inner = document.getElementById("inner");
+              // true为开启捕获，false为开启冒泡
+          	body.addEventListener('click',(e)=>{ // e为事件源（当前点击的元素）
+               if(e.target.id == "inner"){
+                 console.log("inner")
+               }else if(e.target.id == "outer"){
+                 console.log("outer")
+               }else if(e.target.id == "root"){
+                 console.log("root")
+               }else{
+                 console.log("other")
+               }
+            })
+            root.addEventListener("click",(e)=>{
+                e.stopPropagation()
+            },false)
+        // 点击inner，root捕获  ->outer捕获  ->inner捕获  ->inner冒泡 ->outer冒泡  ->root冒泡
+        // 给root捕获阶段添加e.stopPropagation()，点击inner，只输出了root捕获
+    </script>
+</body>
+</html>
